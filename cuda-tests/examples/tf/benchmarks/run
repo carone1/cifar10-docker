@@ -1,0 +1,34 @@
+#!/bin/bash
+
+if [ "x${CONTROLLER_IP}" = "x" ]; then
+  if [ "x${DEV}" = "x" ]; then
+    NUM_GPU=$(ls /dev/nvidia[0-9] -1 2>&1 | wc -l)
+  else
+    NUM_GPU=$(echo "${DEV}" | awk -F\, '{print NF; }')
+  fi
+elif [ -n "${DEV}" ]; then
+  NUM_GPU=$(echo ${DEV} | awk -v RS=',' 'END {print NR}')
+else
+  NUM_GPU=$(echo "${CONTROLLER_IP}" | awk -F\@ '{print $2}')
+  NUM_GPU=${NUM_GPU:-1}
+fi
+
+PS_DEV=${2:-gpu}
+MODEL=${1:-resnet50}
+GMEM=${GMEM:-12}
+STEPS=${STEPS:-1000}
+
+if [ "x${NCCL}" != "x" ]; then
+  NCCL="--variable_update=replicated --all_reduce_spec=nccl"
+fi
+
+PYTHON=python3
+
+if [ ! -e /usr/local/lib/python3.*/dist-packages/tensorflow ]; then
+  PYTHON=python2
+fi
+
+echo "Using ${NUM_GPU} GPU(s) and PS on ${PS_DEV} for model ${MODEL}; GMEM=${GMEM}; with '${DATA_URL:-synthetic data}'.."
+
+echo "Logging: GMEM=${GMEM} ${PYTHON} $(dirname $0)/tf_cnn_benchmarks/tf_cnn_benchmarks.py --num_gpus ${NUM_GPU} --model ${MODEL} --batch_size 64 --num_batches ${STEPS} --data_format=NCHW --local_parameter_device ${PS_DEV} ${DATA_DIR} ${NCCL} --print_training_accuracy --allow_growth"
+GMEM=${GMEM} ${PYTHON} $(dirname $0)/tf_cnn_benchmarks/tf_cnn_benchmarks.py --num_gpus ${NUM_GPU} --model ${MODEL} --batch_size 64 --num_batches ${STEPS} --data_format=NCHW --local_parameter_device ${PS_DEV} ${DATA_DIR} ${NCCL} --print_training_accuracy --allow_growth 2>&1
