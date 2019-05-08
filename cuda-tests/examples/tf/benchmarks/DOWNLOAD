@@ -1,1 +1,0 @@
-How to download:  git clone https://github.com/tensorflow/benchmarks --branch cnn_tf_v1.10_compatible --depth 1 --single-branch
