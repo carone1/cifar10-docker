@@ -54,6 +54,5 @@
                 </bean>
             </list>    
         </property>
-        
     </bean>
 </beans>

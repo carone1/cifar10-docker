@@ -15,7 +15,7 @@ then
 else
     echo "Building Apache Ignite..."
     cd ignite
-    mvn clean package -q -B -DskipTests -Prelease
+    mvn clean package -q -B -DskipTests -Djava.net.preferIPv4Stack=true -Prelease
 
     echo "Unzipping Apache Ignite package..."
     cd ..
