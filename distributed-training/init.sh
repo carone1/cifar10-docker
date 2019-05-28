@@ -5,7 +5,8 @@ else
     echo "Downloading Apache Ignite..."
     git clone https://github.com/apache/ignite.git
     cd ignite
-    git checkout ea33ec7f0af8fcad113cd92953fba0e8e5502dfa
+    #git checkout ea33ec7f0af8fcad113cd92953fba0e8e5502dfa
+    git checkout b141a3eb7487d396bee7919533019f941a504b17
     cd ..
 fi
 
@@ -15,7 +16,7 @@ then
 else
     echo "Building Apache Ignite..."
     cd ignite
-    mvn clean package -q -B -DskipTests -Djava.net.preferIPv4Stack=true -Prelease
+    mvn clean package -q -B -DskipTests -Prelease
 
     echo "Unzipping Apache Ignite package..."
     cd ..
@@ -23,6 +24,8 @@ else
     unzip -qo apache-ignite-2.7.0-SNAPSHOT-bin.zip
     rm apache-ignite-2.7.0-SNAPSHOT-bin.zip
 fi
+
+
 
 echo "Updating path..."
 cd apache-ignite-2.7.0-SNAPSHOT-bin/bin

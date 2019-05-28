@@ -49,12 +49,12 @@ $ docker build -f Dockerfile_for_gpu -t cifar10_gpu:10.0 .
 When Docker image is ready you can start it using:
 
 ```bash
-$ docker run -ti -rm -name cifar10 -v /tmp:/tmp cifar_gpu:1.0.0
+$ docker run -ti --rm -name cifar10  --runtime=nvidia -v /tmp:/tmp cifar_gpu:1.0.0 bash
 ```
 
 ## Start training
 
-You can start training:
+You can start training from within the cifar_gpu container:
 
 ```
 cd models/official/resnet/
