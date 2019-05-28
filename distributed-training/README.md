@@ -93,9 +93,11 @@ $ docker-compose up --scale ignite-server=2
 
 Instead if you want to use the example on multiple servers and GPUs
 
-You must have installed docker-nvidia on the target servers.
+You must have installed docker-nvidia on target servers.
 
-https://chunml.github.io/ChunML.github.io/project/Installing-NVIDIA-Docker-On-Ubuntu-16.04/
+  https://chunml.github.io/ChunML.github.io/project/Installing-NVIDIA-Docker-On-Ubuntu-16.04/
+
+Beware ignite is trying to be smart and tries to dynimacally build the tensorflow configuration using ips it finds on the fly. Make sure you disabled any unnecesary interfaces you have otherwise each ignite/tensorflow will end up with different configuration. https://issues.apache.org/jira/browse/IGNITE-11871
 
 ```bash
 $ docker build -f Dockerfile_gpu -t distributed-training_ignite-server-gpu:1.0.0 . 

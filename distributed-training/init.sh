@@ -6,6 +6,7 @@ else
     git clone https://github.com/apache/ignite.git
     cd ignite
     #git checkout ea33ec7f0af8fcad113cd92953fba0e8e5502dfa
+    # grabbing ignite 2.7.5rc3
     git checkout b141a3eb7487d396bee7919533019f941a504b17
     cd ..
 fi
