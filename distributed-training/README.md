@@ -97,7 +97,7 @@ You must have installed docker-nvidia on target servers.
 
   https://chunml.github.io/ChunML.github.io/project/Installing-NVIDIA-Docker-On-Ubuntu-16.04/
 
-Beware ignite is trying to be smart and tries to dynimacally build the tensorflow configuration using ips it finds on the fly. Make sure you disabled any unnecesary interfaces you have otherwise each ignite/tensorflow will end up with different configuration. https://issues.apache.org/jira/browse/IGNITE-11871
+Beware ignite is trying to be smart and tries to dynamically build the tensorflow configuration using IPs it finds on the fly. Make sure you disabled any unnecesary interfaces you have otherwise each ignite/tensorflow will end up with different configuration and work talk to each other. https://issues.apache.org/jira/browse/IGNITE-11871
 
 ```bash
 $ docker build -f Dockerfile_gpu -t distributed-training_ignite-server-gpu:1.0.0 . 
