@@ -16,7 +16,7 @@ RUN pip3 install --user -r requirements.txt
 # Add Apache Ignite configuration.
 ADD ignite-config.xml ignite-config.xml
 
-#RUN pip3 install tensorflow-io
+RUN pip3 install tensorflow-io
 
 # Start Apache Ignite.
 CMD bash apache-ignite-2.7.0-SNAPSHOT-bin/bin/ignite.sh ignite-config.xml

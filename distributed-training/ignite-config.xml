@@ -31,11 +31,11 @@
                 <property name="defaultDataRegionConfiguration">
                     <bean class="org.apache.ignite.configuration.DataRegionConfiguration">
                         <property name="name" value="Default_Region"/>
-                        <property name="maxSize" value="#{2L * 1024 * 1024 * 1024}"/>
+                        <property name="maxSize" value="#{15L * 1024 * 1024 * 1024}"/>
                     </bean>
                 </property>
                 <property name="systemRegionInitialSize" value="#{2L * 1024 * 1024 * 1024}" />
-                <property name="systemRegionMaxSize" value="#{4L * 1024 * 1024 * 1024}" />
+                <property name="systemRegionMaxSize" value="#{15L * 1024 * 1024 * 1024}" />
             </bean>
         </property>
         <property name="fileSystemConfiguration">

@@ -91,6 +91,25 @@ When Docker image is ready you can start Apache Ignite cluster using Docker Comp
 $ docker-compose up --scale ignite-server=2
 ```
 
+Instead if you want to use the example on multiple servers and GPUs
+
+You must have installed docker-nvidia on the target servers.
+
+https://chunml.github.io/ChunML.github.io/project/Installing-NVIDIA-Docker-On-Ubuntu-16.04/
+
+```bash
+$ docker build -f Dockerfile_gpu -t distributed-training_ignite-server-gpu:1.0.0 . 
+```
+
+When Docker image is ready you can start Apache Ignite cluster nodes using Docker:
+
+```bash
+server-1$ docker run -it --runtime=nvidia --net=host --name ignite-1 --rm distributed-training_ignite-server-gpu:1.0.0
+server-2$ docker run -it --runtime=nvidia --net=host --name ignite-2 --rm distributed-training_ignite-server-gpu:1.0.0
+```
+
+
+
 ## Fill cache
 
 When Apache Ignite cluster is up and running you can save Cifar10 dataset into Apache Ignite cluster cache using the following command:
