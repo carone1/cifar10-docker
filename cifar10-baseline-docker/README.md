@@ -43,13 +43,14 @@ When workspace is initialized you can build Apache Ignite Docker image (that inc
 The convenient way to start Apache Ignite cluster is to use Docker Compose:
 
 ```bash
-$ docker build -f Dockerfile_for_gpu -t cifar10_gpu:10.0 .
+$ docker build -f Dockerfile_cifar10_gpu -t cifar10_gpu:1.0.0 .
 ```
 
 When Docker image is ready you can start it using:
 
 ```bash
-$ docker run -ti --rm -name cifar10  --runtime=nvidia -v /tmp:/tmp cifar_gpu:1.0.0 bash
+$ docker run -ti --name cifar10 --rm --runtime=nvidia -v /tmp:/tmp cifar10_gpu:1.0.0 bash
+
 ```
 
 ## Start training
