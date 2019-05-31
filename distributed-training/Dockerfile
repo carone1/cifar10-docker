@@ -1,7 +1,8 @@
 # Use tensorflow as base image.
-#FROM tensorflow/tensorflow:1.13.0rc0-py3
+FROM tensorflow/tensorflow:1.13.0rc0-py3
 #FROM tensorflow/tensorflow:1.13.1-py3
-FROM tensorflow/tensorflow:nightly-py3
+#FROM tensorflow/tensorflow:nightly-py3
+#FROM tensorflow/tensorflow:1.12.0-py3
 # Install Java and Apache Ignite.
 #ADD http://mirror.linux-ia64.org/apache//ignite/2.7.0/apache-ignite-2.7.0-bin.zip apache-ignite-2.7.0-SNAPSHOT-bin.zip
 #RUN apt-get update && apt-get install -y openjdk-8-jre unzip && unzip apache-ignite-2.7.0-SNAPSHOT-bin.zip && rm *.zip
