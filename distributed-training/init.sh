@@ -7,29 +7,34 @@ else
     cd ignite
     #git checkout ea33ec7f0af8fcad113cd92953fba0e8e5502dfa
     # grabbing ignite 2.7.5rc3
-    git checkout b141a3eb7487d396bee7919533019f941a504b17
+    #git checkout b141a3eb7487d396bee7919533019f941a504b17
+    # grabbing latest from master branch
+    git checkout 8e69ae7648f50aeab7884ae58624be0a632cdd31 
     cd ..
 fi
 
-if [ -d ./apache-ignite-2.7.0-SNAPSHOT-bin ]
+if [ -d ./apache-ignite-2.8.0-SNAPSHOT-bin ]
 then
     echo "Apache Ignite already built..."
 else
+    echo "Patching ignite for tensorflow-io"
+    patch -p0 < ignite.diff
+
     echo "Building Apache Ignite..."
     cd ignite
     mvn clean package -q -B -DskipTests -Prelease
 
     echo "Unzipping Apache Ignite package..."
     cd ..
-    mv ignite/target/bin/apache-ignite-2.7.0-SNAPSHOT-bin.zip ./
-    unzip -qo apache-ignite-2.7.0-SNAPSHOT-bin.zip
-    rm apache-ignite-2.7.0-SNAPSHOT-bin.zip
+    mv ignite/target/bin/apache-ignite-2.8.0-SNAPSHOT-bin.zip ./
+    unzip -qo apache-ignite-2.8.0-SNAPSHOT-bin.zip
+    rm apache-ignite-2.8.0-SNAPSHOT-bin.zip
 fi
 
 
 
 echo "Updating path..."
-cd apache-ignite-2.7.0-SNAPSHOT-bin/bin
+cd apache-ignite-2.8.0-SNAPSHOT-bin/bin
 export PATH=`pwd`:$PATH
 cd ../..
 
