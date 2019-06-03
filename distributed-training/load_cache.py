@@ -11,8 +11,8 @@ batch_size = 32 * 32 * 3 + 1
 idx = 0
 
 client = Client()
-#client.connect('192.168.1.2', 10800)
-client.connect('localhost', 10800)
+client.connect('192.168.1.2', 10800)
+#client.connect('localhost', 10800)
 #client.connect('ignite-1', 10800)
 cache = client.create_cache('TEST_DATA')
 
