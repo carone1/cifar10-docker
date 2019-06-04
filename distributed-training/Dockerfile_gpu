@@ -17,14 +17,11 @@ RUN pip3 install --user -r requirements.txt
 # Add Apache Ignite configuration.
 ADD ignite-config.xml ignite-config.xml
 
-RUN pip3 install tensorflow-io
+# tensorflow-io has a dependency on tensorflow CPU which conflict with tensorflow-gpu
+# https://github.com/tensorflow/io/issues/124
+# using --no-deps to avoid pulling in tensorflow for cpu
+RUN pip3 install tensorflow-io --no-deps
 RUN pip3 install datetime
-
-# tensorflow-io pulls in regular tensorflow which 
-# makes tensorflow-gpu the second choice
-# Working around issue by uninstalling and re-installing tensorfloe-gpu 
-RUN pip uninstall -y tensorflow-gpu
-RUN pip install tensorflow-gpu
 
 # Start Apache Ignite.
 CMD bash apache-ignite-2.8.0-SNAPSHOT-bin/bin/ignite.sh ignite-config.xml
